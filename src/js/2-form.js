@@ -19,12 +19,14 @@ const form = document.querySelector('.feedback-form');
 
 form.addEventListener('input', () => {
   formData = {
-    email: emailInput.value,
-    message: messageTextarea.value,
+    email: emailInput.value.trim(),
+    message: messageTextarea.value.trim(),
   };
   localStorage.setItem(feedbackFormStateKey, JSON.stringify(formData));
 
-  console.log(formData);
+  if (formData.email != '' && formData.message != '') {
+    console.log(formData);
+  }
 });
 
 form.addEventListener('submit', event => {

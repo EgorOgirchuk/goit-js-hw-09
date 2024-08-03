@@ -69,8 +69,17 @@ const images = [
 
 const gallery = document.querySelector('ul.gallery');
 
-const imagesElement = images.forEach(image => {
-  gallery.innerHTML += `
+gallery.innerHTML = render(images);
+
+const lightbox = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionDelay: 250,
+});
+
+function render(images) {
+  let renderHtml = '';
+  images.forEach(image => {
+    renderHtml += `
   <li class="gallery-item">
       <a href="${image.original}" class="gallery-link">  
             <img style="width:360px" 
@@ -81,9 +90,6 @@ const imagesElement = images.forEach(image => {
       </a>
   </li>
   `;
-});
-
-const lightbox = new SimpleLightbox('.gallery a', {
-  captionsData: 'alt',
-  captionDelay: 250,
-});
+  });
+  return renderHtml;
+}
